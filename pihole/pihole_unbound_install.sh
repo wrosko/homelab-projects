@@ -2,11 +2,11 @@
 
 sudo apt-get update && sudo apt-get upgrade -y
 
-sudo apt-get install tmux htop
+sudo apt-get install tmux htop -y
 
 curl -sSL https://install.pi-hole.net | bash
 
-sudo apt install unbound
+sudo apt install unbound -y
 
 mv pi-hole.conf /etc/unbound/unbound.conf.d/pi-hole.conf
 
