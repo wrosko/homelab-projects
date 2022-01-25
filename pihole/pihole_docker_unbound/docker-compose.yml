@@ -1,0 +1,30 @@
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+# https://github.com/willy-wagtail/raspberrypi/blob/main/docker-pihole-unbound/docker-compose.yml
+services:
+  pihole-unbound:
+    build: .
+    container_name: pihole-unbound
+    image: pihole-unbound:latest
+    ports:
+      - "${PIHOLE_ServerIP}:53:53/tcp"
+      - "${PIHOLE_ServerIP}:53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      ServerIP: $PIHOLE_ServerIP
+      TZ: $PIHOLE_TIMEZONE
+      WEBPASSWORD: $PIHOLE_PASSWORD
+      DNS1: 127.0.0.1#5335
+      DNS2: 127.0.0.1#5335
+      DNSSEC: "true"
+    # Volumes store your data between container upgrades
+    volumes:
+      - ~/.pihole-unbound/etc-pihole/:/etc/pihole:rw
+      - ~/.pihole-unbound/etc-dnsmasq.d/:/etc/dnsmasq.d:rw
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    
