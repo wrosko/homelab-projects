@@ -2,7 +2,7 @@ FROM pihole/pihole:latest
 
 RUN apt update -y && apt install -y unbound
 
-COPY pihole.conf /etc/unbound/unbound.conf.d/pi-hole.conf
+COPY pi-hole.conf /etc/unbound/unbound.conf.d/pi-hole.conf
 
 COPY start_unbound_and_pihole.sh start_unbound_and_pihole.sh
 
