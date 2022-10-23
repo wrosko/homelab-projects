@@ -4,7 +4,9 @@ version: "0.1"
 
 services:
   pihole-unbound:
-    build: Dockerfile
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     container_name: pihole-unbound
     ports:
       - "${PIHOLE_ServerIP}:53:53/tcp"
