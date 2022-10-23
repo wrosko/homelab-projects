@@ -4,10 +4,9 @@ version: "0.1"
 
 services:
   pihole-unbound:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
+    build: .
     container_name: pihole-unbound
+    image: pihole-unbound:latest
     ports:
       - "${PIHOLE_ServerIP}:53:53/tcp"
       - "${PIHOLE_ServerIP}:53:53/udp"
